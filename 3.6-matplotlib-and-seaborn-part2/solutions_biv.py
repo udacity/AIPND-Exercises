@@ -147,7 +147,11 @@ def additionalplot_solution_1():
     # data setup
     fuel_econ = pd.read_csv('./data/fuel_econ.csv')
 
-    most_makes = fuel_econ['make'].value_counts().index[:18]
+    THRESHOLD = 80
+    make_frequency = fuel_econ['make'].value_counts()
+    idx = np.sum(make_frequency > THRESHOLD)
+
+    most_makes = make_frequency.index[:idx]
     fuel_econ_sub = fuel_econ.loc[fuel_econ['make'].isin(most_makes)]
 
     make_means = fuel_econ_sub.groupby('make').mean()
@@ -175,7 +179,11 @@ def additionalplot_solution_2():
     # data setup
     fuel_econ = pd.read_csv('./data/fuel_econ.csv')
 
-    most_makes = fuel_econ['make'].value_counts().index[:18]
+    THRESHOLD = 80
+    make_frequency = fuel_econ['make'].value_counts()
+    idx = np.sum(make_frequency > THRESHOLD)
+
+    most_makes = make_frequency.index[:idx]
     fuel_econ_sub = fuel_econ.loc[fuel_econ['make'].isin(most_makes)]
 
     make_means = fuel_econ_sub.groupby('make').mean()
